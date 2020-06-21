@@ -1,0 +1,6 @@
+# Level 1
+
+Making a contribution to the contract fulfills the goal of the challenge. 
+The value is must be less than 0.001 using the contract's contribute function
+after that, it becomes possible to transfer all the funds in the contract
+using await contract.withdraw()

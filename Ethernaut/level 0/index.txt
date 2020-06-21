@@ -1,0 +1,6 @@
+# Level 0
+
+1. I visited "https://ethernaut.openzeppelin.com".
+2. I connected my metamask wallet to the wallet after the prompt came up.
+3. I followed all the steps in the exercise.
+4. The end part involves getting the password from the contract.

